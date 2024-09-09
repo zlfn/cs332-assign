@@ -14,34 +14,34 @@
 #
 # JARs aren't checked in, they are fetched by sbt
 #
-/lib/*.jar
-/test/files/codelib/*.jar
-/test/files/lib/*.jar
-/test/files/speclib/instrumented.jar
-/tools/*.jar
+lib/*.jar
+test/files/codelib/*.jar
+test/files/lib/*.jar
+test/files/speclib/instrumented.jar
+tools/*.jar
 
 # Developer specific properties
-/build.properties
-/buildcharacter.properties
+build.properties
+buildcharacter.properties
 
 # might get generated when testing Jenkins scripts locally
-/jenkins.properties
+jenkins.properties
 
 # target directory for build
-/build/
+build/
 
 # other
-/out/
-/bin/
-/sandbox/
+out/
+bin/
+sandbox/
 
 # intellij
-/src/intellij*/*.iml
-/src/intellij*/*.ipr
-/src/intellij*/*.iws
+src/intellij*/*.iml
+src/intellij*/*.ipr
+src/intellij*/*.iws
 **/.cache
-/.idea
-/.settings
+.idea
+.settings
 
 # vscode
 /.vscode
@@ -51,18 +51,18 @@
 
 # sbt's target directories
 target/
-/target/
-/project/**/target/
-/test/macro-annot/target/
-/test/files/target/
-/test/target/
-/build-sbt/
+target/
+project/**/target/
+test/macro-annot/target/
+test/files/target/
+test/target/
+build-sbt/
 local.sbt
 jitwatch.out
 
 # Used by the restarr/restarrFull commands as target directories
-/build-restarr/
-/target-restarr/
+build-restarr/
+target-restarr/
 
 # metals
 .metals
