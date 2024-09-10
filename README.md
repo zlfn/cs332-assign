@@ -11,9 +11,20 @@ http://pl.postech.ac.kr/~gla/cs332/index.html
 You can check tools' versions and environment variables in [.mise.toml](./.mise.toml)
 
 ```nu
+mise install
 mise trust
 mise set
 ```
 
+```nu
+sbt test
+sbt run
+```
+
 * My IDE is Neovim, and you can find configurations in [here](https://github.com/zlfn/nvim-config)  
 I use metals as Scala lsp. But this is not important for building the program.
+
+## Trivia
+Scala is too fun to wait build  
+
+<img width=60% src="https://github.com/user-attachments/assets/7f4661bb-59aa-4529-8cbe-5e0b6418855f"/>
