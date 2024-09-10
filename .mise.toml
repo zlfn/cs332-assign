@@ -1,5 +1,5 @@
 [tools]
-scala = "3.5.0"
+scala = "2.13.14"
 sbt = "1.10.1"
 java = "temurin-22*"
 
