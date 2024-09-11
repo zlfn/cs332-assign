@@ -26,13 +26,13 @@ object Main {
   /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = {
-    def recBalance(slice: List[Char], count: Int): Boolean = slice match {
+  def balance(chars: Seq[Char]): Boolean = {
+    def recBalance(slice: Seq[Char], count: Int): Boolean = slice match {
       case _ if count < 0 => false
       case '(' :: slice => recBalance(slice, count + 1)
       case ')' :: slice => recBalance(slice, count - 1)
       case _ :: slice => recBalance(slice, count)
-      case Nil => count == 0
+      case Seq() => count == 0
     }
     recBalance(chars, 0)
   }
