@@ -29,9 +29,9 @@ object Main {
   def balance(chars: Seq[Char]): Boolean = {
     def recBalance(slice: Seq[Char], count: Int): Boolean = slice match {
       case _ if count < 0 => false
-      case '(' :: slice => recBalance(slice, count + 1)
-      case ')' :: slice => recBalance(slice, count - 1)
-      case _ :: slice => recBalance(slice, count)
+      case '(' +: slice => recBalance(slice, count + 1)
+      case ')' +: slice => recBalance(slice, count - 1)
+      case _ +: slice => recBalance(slice, count)
       case Seq() => count == 0
     }
     recBalance(chars, 0)
@@ -44,6 +44,6 @@ object Main {
     case _ if money < 0 => 0
     case (0, _) => 1
     case (_, Seq()) => 0
-    case (_, coin :: tail) => countChange(money - coin, coins) + countChange(money, tail)
+    case (_, coin +: tail) => countChange(money - coin, coins) + countChange(money, tail)
   }
 }
