@@ -7,4 +7,5 @@
 * 모듈은 조작하는 물체의 내부를 알면 안된다. 보통 캡슐화라고 하던가
 
 ### Data Transfer Objects
-* 이건 코틀린에서 data class, 스칼라에서 case class라고 부른다.
+* 이건 코틀린에서 data class, 스칼라에서 case class를 이용한다. 다른 프로세스로 정보를 넘길때 사용한다.
+* 특히 API에서 잘 문서화된 데이터를 반환해줬으면 좋겠다.
