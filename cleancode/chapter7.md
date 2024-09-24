@@ -9,7 +9,9 @@
 * 각 예외는 오류의 원인과 위치를 파악할 수 있게 정보를 제공해야한다.
 * Typed Error와 함께 적절한 에러 메시지를 주면 좋겠다. 평문 에러 메시지 그만
 ### Null 반환하지 말라
-* 책에선 예외 던지라고 했지만 예외도 던지지 말자 우리에겐 이제 `Option`(`Optional` in Java/Kotlin), `Some`, `None`이 있다
+* 책에선 예외 던지라고 했지만 예외도 던지지 말자 우리에겐 이제 `Option`(`Optional` in Java/Kotlin), `Some`, `None`이 있다.
+* 정확히는 있어야할 정보가 없을 때 `Result`나 `throw`, 없을 수도 있는 정보일 때 `Option`을 반환하면 될 것이다.
 * https://en.wikipedia.org/wiki/Option_type
+* https://stackoverflow.com/questions/16263560/get-option-value-or-throw-an-excepti
 ### Null 전달하지 말라
 * Optional parameter는 Builder Pattern 쓰자
