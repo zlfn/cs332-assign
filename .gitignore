@@ -68,6 +68,7 @@ target-restarr/
 .metals
 .bloop
 project/**/metals.sbt
+metals.sbt
 
 .bsp
 .history
