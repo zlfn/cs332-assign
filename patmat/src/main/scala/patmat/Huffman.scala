@@ -19,7 +19,9 @@ object Huffman {
    * present in the leaves below it. The weight of a `Fork` node is the sum of the weights of these
    * leaves.
    */
-  abstract class CodeTree
+  abstract class CodeTree {
+    def contains(char: Char): Boolean
+  }
   case class Fork(left: CodeTree, right: CodeTree, chars: List[Char], weight: Int) extends CodeTree {
     def contains(char: Char): Boolean = this.chars contains char 
   }
@@ -171,9 +173,9 @@ object Huffman {
    */
   def decode(tree: CodeTree, bits: List[Bit]): List[Char] = {
     def recurDecode(e: CodeTree, bits: List[Bit]): List[Char] = (e, bits) match {
+      case (fork: Fork, _) if bits.isEmpty => List()
       case (fork: Fork, head :: tails) if head == 0 => recurDecode(fork.left, tails)
       case (fork: Fork, head :: tails) if head == 1 => recurDecode(fork.right, tails)
-      case (fork: Fork, _) if bits.isEmpty => Nil
       case (leaf: Leaf, _) => leaf.char :: recurDecode(tree, bits)
       case _ => throw new Exception("Invalid tree or bits")
     }
@@ -206,9 +208,10 @@ object Huffman {
    */
   def encode(tree: CodeTree)(text: List[Char]): List[Bit] = {
     def recurEncode(e: CodeTree, char: Char): List[Bit] = e match {
-      case fork: Fork if fork contains char => 0 :: recurEncode(fork.left, char)
-      case fork: Fork if !(fork contains char) => 1 :: recurEncode(fork.right, char)
-      case leaf: Leaf => Nil 
+      case fork: Fork if fork.left contains char => 0 :: recurEncode(fork.left, char)
+      case fork: Fork if fork.right contains char => 1 :: recurEncode(fork.right, char)
+      case fork: Fork => {throw new Exception("Char is not in CodeTree")}
+      case leaf: Leaf => List()
     }
     text.map(c => recurEncode(tree, c)).flatten
   }
@@ -223,9 +226,10 @@ object Huffman {
    * the code table `table`.
    */
   def codeBits(table: CodeTable)(char: Char): List[Bit] = table match {
-    case Nil => Nil
-    case (c, bit) :: tails if c == char => bit
+    case List() => Nil
+    case (c, bit) :: _ if c == char => bit
     case (c, bit) :: tails if c != char => codeBits(tails)(char)
+    case _ => {throw new Exception("Invalid codebits")}
   }
 
   /**
@@ -239,7 +243,7 @@ object Huffman {
   def convert(tree: CodeTree): CodeTable = {
     def recurConvert(e: CodeTree, bits: List[Bit]): CodeTable = e match {
       case Fork(l, r, _, _) => mergeCodeTables(recurConvert(l, bits :+ 0), recurConvert(r, bits :+ 1))
-      case Leaf(c, _) => (c, bits) :: Nil
+      case Leaf(c, _) => List((c, bits))
     }
     recurConvert(tree, List())
   }
