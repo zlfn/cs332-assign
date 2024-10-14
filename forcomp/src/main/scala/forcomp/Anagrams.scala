@@ -55,7 +55,7 @@ object Anagrams {
    *
    */
   lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] = 
-    dictionary.groupBy(wordOccurrences).mapValues(_.sorted).toMap
+    dictionary.groupBy(wordOccurrences).map{case (o: Occurrences, l: List[Word]) => (o, l.sorted)}.toMap
 
   /** Returns all the anagrams of a given word. */
   def wordAnagrams(word: Word): List[Word] =
@@ -88,7 +88,7 @@ object Anagrams {
       case (c, n) => (1 to n).map(n => (c, n)).toList}
         .toSet[(Char, Int)]
         .subsets
-        .map(_.toList)
+        .map(_.toList.sortWith((_1, _2) => _1._1 < _2._1))
         .toList
         .filter(a => a.map(c => c._1).size == a.map(c => c._1).toSet.size)
 
@@ -146,15 +146,17 @@ object Anagrams {
    *  Note: There is only one anagram of an empty sentence.
    */
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
-    def innerSentenceAnagrams(occurrences: Occurrences): List[Sentence] = {
-      if(occurrences.length == 0) return List(List())
-      combinations(occurrences).filter(_.nonEmpty).flatMap { //List[Occurences].flatMap
-        combination => dictionaryByOccurrences.get(combination) match { //List[List[Word]].flatMap //뺄 수 있는 단어 목록
-          case None => List(List())
-          case Some(words) => words.flatMap {
-            word => {
-              innerSentenceAnagrams(subtract(occurrences, wordOccurrences(word)))
-                .map(sentence => word :: sentence)
+    def innerSentenceAnagrams(occurrences: Occurrences): List[Sentence] = occurrences match {
+      case List() => List(List())
+      case _ => combinations(occurrences).flatMap {
+        occur_combination => dictionaryByOccurrences.get(occur_combination) match {
+          case None => List()
+          case Some(words) => {
+            words.flatMap {
+              word => {
+                innerSentenceAnagrams(subtract(occurrences, occur_combination))
+                  .map(sentence => word :: sentence)
+              }
             }
           }
         }
