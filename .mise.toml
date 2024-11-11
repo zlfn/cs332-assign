@@ -1,7 +1,7 @@
 [tools]
 scala = "2.13.14"
 sbt = "1.10.1"
-java = "temurin-22*"
+java = "openjdk-23.0.1"
 
 [env]
 TERM = 'xterm-color'
