@@ -1,4 +1,4 @@
-## CHAPTER 2: THe Mythical Man-month
+## CHAPTER 2: The Mythical Man-month
 * 대부분의 프로젝트는 시간 부족으로 실패한다.
   - 모든 일이 계획대로 잘 될 것이라 생각하고 계획을 세우는 경우
   - 사람과 시간을 교환할 수 있을 것이라는 착각
